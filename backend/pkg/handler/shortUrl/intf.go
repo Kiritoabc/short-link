@@ -5,4 +5,5 @@ func NewShortUrlHandler() ShortURLIntf {
 }
 
 type ShortURLIntf interface {
+	GetShortLink(url string) (string, error)
 }
