@@ -2,9 +2,11 @@ definitions:
   utils.Response:
     properties:
       code:
+        example: 7
         type: integer
       data: {}
       msg:
+        example: successed
         type: string
     type: object
 info:
@@ -12,6 +14,28 @@ info:
   title: Short Link API
   version: 1.0.0
 paths:
+  /openapis/:
+    get:
+      description: 短链接跳转
+      parameters:
+      - description: 短链接
+        in: path
+        name: shortlink
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Response'
+            - properties:
+                msg:
+                  type: string
+              type: object
+      summary: 短链接跳转
+      tags:
+      - 短链接跳转
   /openapis/hello:
     get:
       description: 健康检查
@@ -28,4 +52,26 @@ paths:
       summary: 健康检查
       tags:
       - 短链接健康检查
+  /openapis/short:
+    post:
+      description: 获取锻链接
+      parameters:
+      - description: 原始的长链接
+        in: formData
+        name: url
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Response'
+            - properties:
+                msg:
+                  type: string
+              type: object
+      summary: 获取锻链接
+      tags:
+      - 获取锻链接
 swagger: "2.0"
