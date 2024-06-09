@@ -46,12 +46,12 @@ func (s *shortUrlRouter) Hello(ctx *gin.Context) {
 
 // GetShortLink 获取短链接
 //
-// @Tags			获取锻链接
-// @Summary		获取锻链接
-// @Description	获取锻链接
-// @Router			/openapis/short 	[post]
-// @Param			url					formData	string	true	"原始的长链接"
-// @Success		200					{object}	utils.Response{msg=string}
+//	@Tags			获取锻链接
+//	@Summary		获取锻链接
+//	@Description	获取锻链接
+//	@Router			/openapis/short 	[post]
+//	@Param			url					formData	string	true	"原始的长链接"
+//	@Success		200					{object}	utils.Response{msg=string}
 func (s *shortUrlRouter) GetShortLink(ctx *gin.Context) {
 	url, ok := ctx.GetPostForm("url")
 	if !ok {
@@ -70,12 +70,12 @@ func (s *shortUrlRouter) GetShortLink(ctx *gin.Context) {
 
 // GetLink 获取短链接
 //
-// @Tags			短链接跳转
-// @Summary		短链接跳转
-// @Description	短链接跳转
-// @Router			/openapis/ 				[get]
-// @Param			shortlink	path		string	true	"短链接"
-// @Success		200			{object}	utils.Response{msg=string}
+//	@Tags			短链接跳转
+//	@Summary		短链接跳转
+//	@Description	短链接跳转
+//	@Router			/openapis/ 								[get]
+//	@Param			shortlink	path		string	true	"短链接"
+//	@Success		200			{object}	utils.Response{msg=string}
 func (s *shortUrlRouter) GetLink(ctx *gin.Context) {
 	shortlink := ctx.Param("shortlink")
 	split := strings.Split(shortlink, "/")
