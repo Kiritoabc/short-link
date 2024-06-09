@@ -2,6 +2,9 @@ package app
 
 import (
 	"github.com/Kiritoabc/short-link/backend/pkg/config"
+	"github.com/Kiritoabc/short-link/backend/pkg/database"
+	router2 "github.com/Kiritoabc/short-link/backend/pkg/router"
+	"github.com/Kiritoabc/short-link/backend/pkg/utils/snowflake"
 	"github.com/spf13/cobra"
 )
 
@@ -27,5 +30,17 @@ func applyConfig(cmd *cobra.Command) {
 
 // init
 func run() {
+	// 舒适化数据库连接
+	err := database.Init()
+	if err != nil {
+		panic(err)
+	}
+	// init snowflake
+	snowflake.InitSnowFlake()
 
+	// gin router
+	router := router2.InitGinRouter()
+	if err := router.Run(config.Port.Value); err != nil {
+		panic(err)
+	}
 }

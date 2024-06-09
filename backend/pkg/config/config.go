@@ -22,7 +22,9 @@ var (
 	// DatabaseDriver  database driver
 	DatabaseDriver = NewFlag("use-database-driver", "mysql", "what database driver your want to use,now support [mysql]")
 	// EnableSwagger swagger enabled
-	EnableSwagger = NewFlag("enable-swagger", "false", "wether swagger eanbled")
+	EnableSwagger = NewFlag("enable-swagger", "true", "wether swagger eanbled")
+	// SnowFlakeNode snowflake
+	SnowFlakeNode = NewFlag("snowfalke node", "1", "snowflake node num")
 
 	// SLDatabaseHost
 	// SLDatabasePort

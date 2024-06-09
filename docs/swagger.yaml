@@ -1,0 +1,31 @@
+definitions:
+  utils.Response:
+    properties:
+      code:
+        type: integer
+      data: {}
+      msg:
+        type: string
+    type: object
+info:
+  contact: {}
+  title: Short Link API
+  version: 1.0.0
+paths:
+  /openapis/hello:
+    get:
+      description: 健康检查
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/utils.Response'
+            - properties:
+                msg:
+                  type: string
+              type: object
+      summary: 健康检查
+      tags:
+      - 短链接健康检查
+swagger: "2.0"

@@ -41,7 +41,7 @@ func getGormDB(getDsnFunc func() string, databaseDriver driver) (*gorm.DB, error
 }
 
 func parse2Dsn(username, password, host, port, schema, args string) string {
-	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", host, port, username, password, schema)
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", username, password, host, port, schema)
 	if strings.EqualFold(args, "") {
 		return dsn
 	}
