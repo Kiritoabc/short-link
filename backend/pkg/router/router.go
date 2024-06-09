@@ -29,6 +29,7 @@ func InitGinRouter() *gin.Engine {
 	// add mid ware handlers
 
 	applySwagger(engine)
+
 	// register router
 	for _, cf := range controllerFuncs {
 		c := cf()
