@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/Kiritoabc/short-link/backend/cmd/backend-server/app"
+	_ "github.com/Kiritoabc/short-link/docs"
 	"log"
 )
 
