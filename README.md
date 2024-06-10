@@ -7,4 +7,6 @@
 - cobra
 - zap
 - gorm
+- gen
 - mysql
+- swagger
