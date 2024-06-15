@@ -15,6 +15,44 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/openapis/": {
+            "get": {
+                "description": "短链接跳转",
+                "tags": [
+                    "短链接跳转"
+                ],
+                "summary": "短链接跳转",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "短链接",
+                        "name": "shortlink",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/utils.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
         "/openapis/hello": {
             "get": {
                 "description": "健康检查",
@@ -43,6 +81,44 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/openapis/short": {
+            "post": {
+                "description": "获取锻链接",
+                "tags": [
+                    "获取锻链接"
+                ],
+                "summary": "获取锻链接",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "原始的长链接",
+                        "name": "url",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/utils.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -50,11 +126,13 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "code": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 7
                 },
                 "data": {},
                 "msg": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "successed"
                 }
             }
         }
