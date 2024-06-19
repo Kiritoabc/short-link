@@ -20,7 +20,7 @@ paths:
       parameters:
       - description: 短链接
         in: path
-        name: shortlink
+        name: shortLink
         required: true
         type: string
       responses:
@@ -54,7 +54,7 @@ paths:
       - 短链接健康检查
   /openapis/short:
     post:
-      description: 获取锻链接
+      description: 生成短链接
       parameters:
       - description: 原始的长链接
         in: formData
@@ -71,7 +71,7 @@ paths:
                 msg:
                   type: string
               type: object
-      summary: 获取锻链接
+      summary: 生成短链接
       tags:
-      - 获取锻链接
+      - 生成短链接
 swagger: "2.0"

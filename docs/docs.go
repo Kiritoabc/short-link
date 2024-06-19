@@ -26,7 +26,7 @@ const docTemplate = `{
                     {
                         "type": "string",
                         "description": "短链接",
-                        "name": "shortlink",
+                        "name": "shortLink",
                         "in": "path",
                         "required": true
                     }
@@ -84,11 +84,11 @@ const docTemplate = `{
         },
         "/openapis/short": {
             "post": {
-                "description": "获取锻链接",
+                "description": "生成短链接",
                 "tags": [
-                    "获取锻链接"
+                    "生成短链接"
                 ],
-                "summary": "获取锻链接",
+                "summary": "生成短链接",
                 "parameters": [
                     {
                         "type": "string",
