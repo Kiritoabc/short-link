@@ -2,6 +2,7 @@ package shortUrl
 
 import (
 	shortUrlHandler "github.com/Kiritoabc/short-link/backend/pkg/handler/shortUrl"
+	"github.com/Kiritoabc/short-link/backend/pkg/midware"
 	"github.com/Kiritoabc/short-link/backend/pkg/utils"
 	routerutil "github.com/Kiritoabc/short-link/backend/pkg/utils/router"
 	"github.com/gin-gonic/gin"
@@ -26,10 +27,8 @@ func (s *shortUrlRouter) GetGroup(engine *gin.Engine) *gin.RouterGroup {
 func (s *shortUrlRouter) RegisterRouter(group *gin.RouterGroup) {
 	group.GET("/hello", s.Hello)
 	group.POST("/short", s.GenerateShortLink)
-	group.GET("/short/*shortLink", s.GetLink)
+	group.Use(midware.IpMidwareHandFunc).GET("/short/*shortLink", s.GetLink)
 }
-
-var Hmap = make(map[string]string)
 
 // Hello hello接口
 //

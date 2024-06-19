@@ -14,7 +14,7 @@ var controllerFuncs = []func() routerutil.ApiController{
 	shortUrl.NewShortUrlRouter,
 }
 
-// swag init -g .\router.go -o ../../../docs --parseDependency --parseInternal
+// swag init -g router.go -o ../../../docs --parseDependency --parseInternal
 
 // InitGinRouter init gin router
 //
