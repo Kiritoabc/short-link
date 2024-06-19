@@ -1,3 +1,5 @@
+create database shortlink;
+
 use shortlink;
 -- 短链表
 CREATE TABLE short_links (

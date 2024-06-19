@@ -1,0 +1,4 @@
+run:
+	go run backend/cmd/backend-server/main.go
+
+

@@ -7,7 +7,7 @@ import (
 
 func main1() {
 	g := gen.NewGenerator(gen.Config{
-		OutPath: "./query",
+		OutPath: "./dao",
 		Mode:    gen.WithoutContext | gen.WithDefaultQuery | gen.WithQueryInterface, // generate mode
 	})
 	database.Init()

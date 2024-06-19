@@ -24,7 +24,7 @@ var (
 	// EnableSwagger swagger enabled
 	EnableSwagger = NewFlag("enable-swagger", "true", "wether swagger eanbled")
 	// SnowFlakeNode snowflake
-	SnowFlakeNode = NewFlag("snowfalke node", "1", "snowflake node num")
+	SnowFlakeNode = NewFlag("snowfalke-node", "1", "snowflake node num")
 
 	// SLDatabaseHost
 	// SLDatabasePort

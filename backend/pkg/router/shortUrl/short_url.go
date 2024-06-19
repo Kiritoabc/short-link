@@ -25,8 +25,8 @@ func (s *shortUrlRouter) GetGroup(engine *gin.Engine) *gin.RouterGroup {
 
 func (s *shortUrlRouter) RegisterRouter(group *gin.RouterGroup) {
 	group.GET("/hello", s.Hello)
-	group.POST("/short", s.GetShortLink)
-	group.GET("/short/*shortlink", s.GetLink)
+	group.POST("/short", s.GenerateShortLink)
+	group.GET("/short/*shortLink", s.GetLink)
 }
 
 var Hmap = make(map[string]string)
@@ -44,28 +44,27 @@ func (s *shortUrlRouter) Hello(ctx *gin.Context) {
 	return
 }
 
-// GetShortLink 获取短链接
+// GenerateShortLink 生成短链接
 //
-//	@Tags			获取锻链接
-//	@Summary		获取锻链接
-//	@Description	获取锻链接
+//	@Tags			生成短链接
+//	@Summary		生成短链接
+//	@Description	生成短链接
 //	@Router			/openapis/short 	[post]
 //	@Param			url					formData	string	true	"原始的长链接"
 //	@Success		200					{object}	utils.Response{msg=string}
-func (s *shortUrlRouter) GetShortLink(ctx *gin.Context) {
+func (s *shortUrlRouter) GenerateShortLink(ctx *gin.Context) {
 	url, ok := ctx.GetPostForm("url")
 	if !ok {
 		utils.FailWithMessage("url参数错误", ctx)
 		return
 	}
 	// 使用snowflake测试
-	shortUrl, err := s.handler.GetShortLink(url)
+	shortUrlDto, err := s.handler.GenerateShortLink(url)
 	if err != nil {
 		utils.FailWithMessage(err.Error(), ctx)
 		return
 	}
-	Hmap[shortUrl] = url
-	utils.OkWithData(shortUrl, ctx)
+	utils.OkWithData(shortUrlDto, ctx)
 }
 
 // GetLink 获取短链接
@@ -74,16 +73,16 @@ func (s *shortUrlRouter) GetShortLink(ctx *gin.Context) {
 //	@Summary		短链接跳转
 //	@Description	短链接跳转
 //	@Router			/openapis/ 								[get]
-//	@Param			shortlink	path		string	true	"短链接"
+//	@Param			shortLink	path		string	true	"短链接"
 //	@Success		200			{object}	utils.Response{msg=string}
 func (s *shortUrlRouter) GetLink(ctx *gin.Context) {
-	shortlink := ctx.Param("shortlink")
-	split := strings.Split(shortlink, "/")
-	url := Hmap[split[1]]
-	if url == "" {
-		utils.FailWithMessage("短链接不存在", ctx)
+	shortLink := ctx.Param("shortLink")
+	split := strings.Split(shortLink, "/")
+	shortUrlDto, err := s.handler.GetLink(split[1])
+	if err != nil {
+		utils.FailWithMessage(err.Error(), ctx)
 		return
 	}
 	// 将链接放入Location，使用302跳转,只跳转到url，不要包含当前的业务
-	ctx.Redirect(http.StatusFound, url)
+	ctx.Redirect(http.StatusFound, shortUrlDto.OriginalURL)
 }

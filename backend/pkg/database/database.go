@@ -3,6 +3,7 @@ package database
 import (
 	"fmt"
 	"github.com/Kiritoabc/short-link/backend/pkg/config"
+	"github.com/Kiritoabc/short-link/backend/pkg/dao"
 	"gorm.io/gorm"
 	"strings"
 )
@@ -21,6 +22,8 @@ func Init() error {
 	if err != nil {
 		return err
 	}
+	// 设置数据库
+	dao.SetDefault(ShortLinkDB)
 	return nil
 }
 
