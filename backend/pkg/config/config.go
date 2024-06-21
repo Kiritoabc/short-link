@@ -18,7 +18,7 @@ var Flags = []*Flag{}
 
 var (
 	// Port server port
-	Port = NewFlag("server-port", ":8080", "http server port")
+	Port = NewFlag("server-port", ":8081", "http server port")
 	// DatabaseDriver  database driver
 	DatabaseDriver = NewFlag("use-database-driver", "mysql", "what database driver your want to use,now support [mysql]")
 	// EnableSwagger swagger enabled
