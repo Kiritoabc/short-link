@@ -25,6 +25,7 @@ func applyConfig(cmd *cobra.Command) {
 	flags := config.Flags
 	for _, flag := range flags {
 		cmd.Flags().StringVar(&flag.Value, flag.Name, flag.Value, flag.Description)
+		//cmd.Flags().StringP(flag.Name, "", flag.Value, flag.Description)
 	}
 }
 

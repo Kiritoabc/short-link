@@ -1,4 +1,7 @@
 run:
-	go run backend/cmd/backend-server/main.go
+	go run backend/cmd/backend-server/main.go --server-port=8080
 
 
+
+Run:
+	go run gateway/cmd/gateway-server/main.go

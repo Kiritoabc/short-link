@@ -14,11 +14,22 @@ func NewFlag(name, value, description string) *Flag {
 	}
 }
 
-var Flags = []*Flag{}
+var Flags = []*Flag{
+	Port,
+	DatabaseDriver,
+	EnableSwagger,
+	SnowFlakeNode,
+	SLDatabaseHost,
+	SLDatabasePort,
+	SLDatabaseUsername,
+	SLDatabasePassword,
+	SLDatabaseScheme,
+	SLDatabaseArgs,
+}
 
 var (
 	// Port server port
-	Port = NewFlag("server-port", ":8080", "http server port")
+	Port = NewFlag("server-port", ":8081", "http server port")
 	// DatabaseDriver  database driver
 	DatabaseDriver = NewFlag("use-database-driver", "mysql", "what database driver your want to use,now support [mysql]")
 	// EnableSwagger swagger enabled

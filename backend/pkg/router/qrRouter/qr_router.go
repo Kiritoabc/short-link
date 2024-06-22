@@ -26,8 +26,7 @@ func (q *QrRouter) RegisterRouter(group *gin.RouterGroup) {
 }
 
 func (q *QrRouter) GenerateQrCode(ctx *gin.Context) {
-	url := ctx.Param("url")
-
+	url := ctx.Query("url")
 	qrCode, err := q.handler.GenerateQrCode(url)
 	if err != nil {
 		utils.FailWithMessage(err.Error(), ctx)
