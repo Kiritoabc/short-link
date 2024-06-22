@@ -14,7 +14,18 @@ func NewFlag(name, value, description string) *Flag {
 	}
 }
 
-var Flags = []*Flag{}
+var Flags = []*Flag{
+	Port,
+	DatabaseDriver,
+	EnableSwagger,
+	SnowFlakeNode,
+	SLDatabaseHost,
+	SLDatabasePort,
+	SLDatabaseUsername,
+	SLDatabasePassword,
+	SLDatabaseScheme,
+	SLDatabaseArgs,
+}
 
 var (
 	// Port server port

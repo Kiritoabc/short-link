@@ -1,5 +1,5 @@
 run:
-	go run backend/cmd/backend-server/main.go
+	go run backend/cmd/backend-server/main.go --server-port=8080
 
 
 

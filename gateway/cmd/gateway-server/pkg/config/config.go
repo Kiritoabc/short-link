@@ -14,7 +14,10 @@ func NewFlag(name, value, description string) *Flag {
 	}
 }
 
-var Flags = []*Flag{}
+var Flags = []*Flag{
+	Port,
+	ProxyPort,
+}
 
 var (
 	// Port gateway server port
