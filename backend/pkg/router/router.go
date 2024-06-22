@@ -2,6 +2,7 @@ package router
 
 import (
 	"github.com/Kiritoabc/short-link/backend/pkg/config"
+	"github.com/Kiritoabc/short-link/backend/pkg/router/qrRouter"
 	"github.com/Kiritoabc/short-link/backend/pkg/router/shortUrl"
 	routerutil "github.com/Kiritoabc/short-link/backend/pkg/utils/router"
 	"github.com/gin-gonic/gin"
@@ -12,6 +13,7 @@ import (
 
 var controllerFuncs = []func() routerutil.ApiController{
 	shortUrl.NewShortUrlRouter,
+	qrRouter.NewQrRouter,
 }
 
 // swag init -g router.go -o ../../../docs --parseDependency --parseInternal
