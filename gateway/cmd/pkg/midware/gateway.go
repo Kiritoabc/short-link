@@ -2,7 +2,7 @@ package midware
 
 import (
 	"fmt"
-	"github.com/Kiritoabc/short-link/gateway/cmd/gateway-server/pkg/config"
+	"github.com/Kiritoabc/short-link/gateway/cmd/pkg/config"
 	"github.com/gin-gonic/gin"
 	"math/rand"
 	"net/http/httputil"

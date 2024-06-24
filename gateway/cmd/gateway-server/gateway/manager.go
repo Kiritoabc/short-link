@@ -1,8 +1,8 @@
 package gateway
 
 import (
-	"github.com/Kiritoabc/short-link/gateway/cmd/gateway-server/pkg/config"
-	"github.com/Kiritoabc/short-link/gateway/cmd/gateway-server/pkg/midware"
+	"github.com/Kiritoabc/short-link/gateway/cmd/pkg/config"
+	"github.com/Kiritoabc/short-link/gateway/cmd/pkg/midware"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/cobra"
 )
