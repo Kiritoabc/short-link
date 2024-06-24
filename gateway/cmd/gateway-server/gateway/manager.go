@@ -9,8 +9,8 @@ import (
 
 func Command() *cobra.Command {
 	cmd := cobra.Command{
-		Use:  "gateway",
-		Long: "gateway server",
+		Use:   "gateway",
+		Short: "gateway server",
 		Run: func(cmd *cobra.Command, args []string) {
 			run()
 		},
@@ -24,7 +24,7 @@ func Command() *cobra.Command {
 func applyConfig(cmd *cobra.Command) {
 	flags := config.Flags
 	for _, flag := range flags {
-		cmd.Flags().StringVarP(&flag.Value, flag.Name, flag.Name, flag.Value, flag.Description)
+		cmd.Flags().StringVar(&flag.Value, flag.Name, flag.Value, flag.Description)
 	}
 }
 
@@ -33,7 +33,7 @@ func applyConfig(cmd *cobra.Command) {
 func applyLoadBalancer() {
 	// 测试
 	// 初始化，负载均衡的IP地址
-	midware.Ip = append(midware.Ip, "http://127.0.0.1:8081", "http://127.0.0.1:8081")
+	midware.Ip = append(midware.Ip, "http://127.0.0.1:8081", "http://127.0.0.1:8082")
 	// load balance
 	// 1. random
 	// 2. round robin
