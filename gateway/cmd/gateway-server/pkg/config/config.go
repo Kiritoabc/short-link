@@ -25,4 +25,7 @@ var (
 
 	// ProxyPort Proxy Server Port
 	ProxyPort = NewFlag("proxy-port", "http://127.0.0.1:8081", "http server port")
+
+	// ProxyModel proxy model
+	ProxyModel = NewFlag("proxy-model", "rand", "proxy model")
 )
