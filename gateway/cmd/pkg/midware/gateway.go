@@ -4,18 +4,14 @@ import (
 	"fmt"
 	"github.com/Kiritoabc/short-link/gateway/cmd/pkg/config"
 	"github.com/gin-gonic/gin"
-	"math/rand"
 	"net/http/httputil"
 	"net/url"
-	"sync/atomic"
 )
 
 var (
-	Ip              = []string{}
-	poolIndex int64 = 0
+	Ip        []string
+	WeightIps []WeightNode
 )
-
-// 初始化我们需要的IP
 
 // LoadBalancerMiddleware 负载均衡的中间件
 func LoadBalancerMiddleware(ctx *gin.Context) {
@@ -53,28 +49,38 @@ func proxyLoadBalance(ctx *gin.Context, opts ...ProxyOption) {
 	}
 }
 
-// WithPoolBL 轮询
-func WithPoolBL(ctx *gin.Context) ProxyOption {
+// WithPoolLB 轮询
+func WithPoolLB(ctx *gin.Context) ProxyOption {
 	return optionFunc(func(o *backend) {
-		n := len(Ip)
-		if poolIndex >= int64(n) {
-			atomic.StoreInt64(&poolIndex, 0)
-		}
-		// 拿到代理的Ip地址
-		proxyIp := Ip[poolIndex]
-		atomic.AddInt64(&poolIndex, 1)
-		proxyHandler(proxyIp, ctx)
+		proxyHandler(poolServer.getNode(), ctx)
 	})
 }
 
-// WithRandBL 随机
-func WithRandBL(ctx *gin.Context) ProxyOption {
+// WithRandLB 随机
+func WithRandLB(ctx *gin.Context) ProxyOption {
 	return optionFunc(func(o *backend) {
-		// 随机
-		randIndex := rand.Intn(len(Ip))
+		proxyHandler(randServer.getNode(), ctx)
+	})
+}
 
-		proxyIp := Ip[randIndex]
-		proxyHandler(proxyIp, ctx)
+// WithRandPoolLB 随机+轮询
+func WithRandPoolLB(ctx *gin.Context) ProxyOption {
+	return optionFunc(func(o *backend) {
+		proxyHandler(randPoolServer.getNode(), ctx)
+	})
+}
+
+// WithWightPoolBl 加权轮训
+func WithWightPoolBl(ctx *gin.Context) ProxyOption {
+	return optionFunc(func(o *backend) {
+		proxyHandler(weightPoolServer.getNode(), ctx)
+	})
+}
+
+// WithHashLb hash
+func WithHashLb(ctx *gin.Context) ProxyOption {
+	return optionFunc(func(o *backend) {
+		proxyHandler(hashRing.getNode(ctx.RemoteIP()), ctx)
 	})
 }
 
@@ -91,10 +97,17 @@ func proxyHandler(proxyIp string, ctx *gin.Context) {
 func ProxyModel(ctx *gin.Context, model string) ProxyOption {
 	switch model {
 	case "pool":
-		return WithPoolBL(ctx)
+		return WithPoolLB(ctx)
 	case "rand":
-		return WithRandBL(ctx)
+		return WithRandLB(ctx)
+	case "randAndPool":
+		return WithRandPoolLB(ctx)
+	case "weightPool":
+		return WithWightPoolBl(ctx)
+	case "hash":
+		return WithHashLb(ctx)
 	default:
-		return WithRandBL(ctx)
+		fmt.Println("proxy model error")
+		return WithRandLB(ctx)
 	}
 }
