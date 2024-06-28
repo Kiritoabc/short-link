@@ -21,6 +21,10 @@ var Flags = []*Flag{
 	ProxyWeight,
 }
 
+var NodeFlag = []*Flag{
+	ProxyPort,
+}
+
 var (
 	// Port gateway server port
 	Port = NewFlag("gateway-port", ":8000", "http server port")
@@ -33,4 +37,6 @@ var (
 
 	// ProxyModel proxy model
 	ProxyModel = NewFlag("proxy-model", "rand", "proxy model")
+
+	ReplicateCount = NewFlag("replicate-count", "3", "replicate count")
 )

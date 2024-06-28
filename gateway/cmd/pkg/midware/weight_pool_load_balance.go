@@ -2,6 +2,7 @@ package midware
 
 import (
 	"fmt"
+	"github.com/Kiritoabc/short-link/gateway/cmd/pkg/config"
 	"math/rand"
 	"time"
 )
@@ -18,6 +19,14 @@ type WeightNode struct {
 }
 
 func InitWeightPoolServer() {
+	// init
+	weightFlags := config.WeightFlags
+	for _, wflag := range weightFlags {
+		WeightIps = append(WeightIps, WeightNode{
+			Node:   wflag.Value,
+			Weight: wflag.Weight,
+		})
+	}
 	weightPoolServer.addWeightNodes(WeightIps)
 }
 

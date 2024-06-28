@@ -1,6 +1,7 @@
 package midware
 
 import (
+	"github.com/Kiritoabc/short-link/gateway/cmd/pkg/config"
 	"hash/crc32"
 	"sort"
 	"strconv"
@@ -12,11 +13,13 @@ var hashRing = &HashRing{}
 
 func InitHashRing() {
 	// test
-	hashRing.replicateCount = 5
+	replicateCount, _ := strconv.Atoi(config.ReplicateCount.Value)
+	hashRing.replicateCount = replicateCount
 	hashRing.nodes = make(map[uint32]string)
 	hashRing.sortedNodes = []uint32{}
-	hashRing.addNode("127.0.0.1:8081")
-	hashRing.addNode("127.0.0.1:8082")
+	for _, node := range config.NodeFlag {
+		hashRing.addNode(node.Value)
+	}
 }
 
 type HashRing struct {
