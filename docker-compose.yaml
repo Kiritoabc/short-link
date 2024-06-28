@@ -1,0 +1,39 @@
+#version: 'v3.8'
+#
+#services:
+#  gateway:
+#    image: kirito768168/gateway:v1.0
+#    ports:
+#      - '8000:8000'
+#    networks:
+#      - shortlinknet
+#
+#  db:
+#    image: mysql:8.0.32
+#    ports:
+#      - '3306:3306'
+#    networks:
+#      - shortlinknet
+##    volumes:
+##      - ./sql: /docker-entrypoint-initdb.d
+##      - dbdata: 3f23c1967b5bcba077baff215890d3fc97c793dac312e7d22b06332458157261
+#
+#  app1:
+#    image: kirito768168/shortlink:v1.0
+#    ports:
+#      - '8081:8080'
+#    networks:
+#      - shortlinknet
+##  app2:
+##    image: kirito768168/shortlink:v1.0
+##    ports: '8082:8080'
+##    networks:
+##      - shortlinknet
+##  app3:
+##    image: kirito768168/shortlink:v1.0
+##    ports: '8083:8080'
+##    networks:
+##      - shortlinknet
+#  networks:
+#    shortlinknet:
+#      driver: bridge
