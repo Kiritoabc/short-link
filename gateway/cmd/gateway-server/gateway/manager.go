@@ -6,7 +6,6 @@ import (
 	"github.com/Kiritoabc/short-link/gateway/cmd/pkg/midware"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/cobra"
-	"sort"
 )
 
 func Command() *cobra.Command {
@@ -33,18 +32,12 @@ func applyConfig(cmd *cobra.Command) {
 // 选项模式？
 
 func applyLoadBalancer() {
-	// 测试
-	// 初始化，负载均衡的IP地址
-	midware.Ip = append(midware.Ip, "http://127.0.0.1:8081", "http://127.0.0.1:8082")
-	// 测试
-	for i, v := range midware.Ip {
-		midware.WeightIps = append(midware.WeightIps, midware.WeightNode{Node: v, Weight: i})
+	// init Node
+	if config.ProxyModel.Value != "weightPool" {
+		for _, nflag := range config.NodeFlag {
+			midware.Ip = append(midware.Ip, nflag.Value)
+		}
 	}
-	// sort ? 不一定需要
-	sort.Slice(midware.WeightIps, func(i, j int) bool {
-		return midware.WeightIps[i].Weight > midware.WeightIps[j].Weight
-	})
-
 	// 初始化 负载均衡算法
 	switch config.ProxyModel.Value {
 	case "pool":
