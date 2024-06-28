@@ -16,21 +16,25 @@ func NewFlag(name, value, description string) *Flag {
 
 var Flags = []*Flag{
 	Port,
-	ProxyPort,
+	ProxyPort1,
 	ProxyModel,
 	ProxyWeight,
 }
 
 var NodeFlag = []*Flag{
-	ProxyPort,
+	ProxyPort1,
+	ProxyPort2,
+	ProxyPort3,
 }
 
 var (
 	// Port gateway server port
 	Port = NewFlag("gateway-port", ":8000", "http server port")
 
-	// ProxyPort Proxy Server Port
-	ProxyPort = NewFlag("proxy-port", "http://127.0.0.1:8081", "http server port")
+	// ProxyPort1 Proxy Server Port
+	ProxyPort1 = NewFlag("proxy-port", "http://127.0.0.1:8081", "http server port")
+	ProxyPort2 = NewFlag("proxy-port", "http://127.0.0.1:8082", "http server port")
+	ProxyPort3 = NewFlag("proxy-port", "http://127.0.0.1:8083", "http server port")
 
 	// ProxyWeight proxy server weight
 	ProxyWeight = NewFlag("proxy-weight", "1", "proxy weight")
