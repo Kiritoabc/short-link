@@ -1,11 +1,13 @@
 package config
 
+// Flag config flag
 type Flag struct {
 	Name        string // flag name
 	Value       string // flag value
 	Description string // flag Description
 }
 
+// NewFlag new flag
 func NewFlag(name, value, description string) *Flag {
 	return &Flag{
 		Name:        name,
@@ -14,6 +16,7 @@ func NewFlag(name, value, description string) *Flag {
 	}
 }
 
+// Flags all flags
 var Flags = []*Flag{
 	Port,
 	DatabaseDriver,
@@ -27,6 +30,7 @@ var Flags = []*Flag{
 	SLDatabaseArgs,
 }
 
+// Config config
 var (
 	// Port server port
 	Port = NewFlag("server-port", ":8081", "http server port")

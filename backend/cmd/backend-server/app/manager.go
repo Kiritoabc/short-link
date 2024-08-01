@@ -8,6 +8,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// Command 启动服务
 func Command() *cobra.Command {
 	cmd := cobra.Command{
 		Use:  "backend-server",
@@ -21,6 +22,7 @@ func Command() *cobra.Command {
 	return &cmd
 }
 
+// applyConfig 应用配置
 func applyConfig(cmd *cobra.Command) {
 	flags := config.Flags
 	for _, flag := range flags {
@@ -29,7 +31,7 @@ func applyConfig(cmd *cobra.Command) {
 	}
 }
 
-// init
+// run 运行服务
 func run() {
 	// 舒适化数据库连接
 	err := database.Init()

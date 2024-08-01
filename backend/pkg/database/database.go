@@ -27,6 +27,7 @@ func Init() error {
 	return nil
 }
 
+// getShortLinkDatabaseConfig 获取数据库配置
 func getShortLinkDatabaseConfig() string {
 	var username, password, host, port, scheme, args string
 	username = config.SLDatabaseUsername.Value
@@ -38,11 +39,13 @@ func getShortLinkDatabaseConfig() string {
 	return parse2Dsn(username, password, host, port, scheme, args)
 }
 
+// getGormDB 获取gorm数据库
 func getGormDB(getDsnFunc func() string, databaseDriver driver) (*gorm.DB, error) {
 	dsn := getDsnFunc()
 	return gorm.Open(databaseDriver.openFunc()(dsn), &gorm.Config{})
 }
 
+// parse2Dsn 解析数据库配置
 func parse2Dsn(username, password, host, port, schema, args string) string {
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", username, password, host, port, schema)
 	if strings.EqualFold(args, "") {

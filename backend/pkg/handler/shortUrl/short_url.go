@@ -9,11 +9,17 @@ import (
 	"github.com/jinzhu/copier"
 )
 
+// shortURLHandler
 type shortURLHandler struct{}
 
+// GetLink 获取短链路
 func (s *shortURLHandler) GetLink(shortLink string) (*dto.ShortLinkDTO, error) {
 	// 从数据库中获取
-	link, err := dao.ShortLink.Select(dao.ShortLink.OriginalURL).Where(dao.ShortLink.ShortCode.Eq(shortLink)).First()
+	link, err := dao.ShortLink.
+		Select(dao.ShortLink.OriginalURL).
+		Where(dao.ShortLink.ShortCode.Eq(shortLink)).
+		First()
+
 	if err != nil {
 		return nil, err
 	}
@@ -24,6 +30,7 @@ func (s *shortURLHandler) GetLink(shortLink string) (*dto.ShortLinkDTO, error) {
 	return &shortLinkDTO, nil
 }
 
+// GenerateShortLink 生成短链路
 func (s *shortURLHandler) GenerateShortLink(url string) (*dto.ShortLinkDTO, error) {
 	// snowflake
 	id := snowflake.Snowflake.Generate()
